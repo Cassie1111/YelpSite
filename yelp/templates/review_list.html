@@ -1,0 +1,241 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>Results</title>
+    <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="/static/css/icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/red-color.css">
+    <link rel="stylesheet" href="/static/css/yellow-color.css">
+    <link rel="stylesheet" href="/static/css/responsive.css">
+
+<script type="text/javascript">
+ 
+    function display(id){  
+        var traget=document.getElementById(id);  
+        if(traget.style.display=="none"){  
+            traget.style.display="";  
+        }else{  
+            traget.style.display="none";  
+      }  
+   }  
+</script>
+
+</head>
+<body itemscope>
+    <main>
+        <div class="preloader">
+            <div id="cooking">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div id="area">
+                    <div id="sides">
+                        <div id="pan"></div>
+                        <div id="handle"></div>
+                    </div>
+                    <div id="pancake">
+                        <div id="pastry"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <header class="stick">
+            <div class="logo-menu-sec">
+                <div class="container">
+                    <div class="logo"><h1 itemprop="headline"><a href="" title="Home" itemprop="url"><img src="/static/images/logo2.jpg" alt="logo.png" itemprop="image"></a></h1></div>
+                    <nav>
+                        <div class="menu-sec">
+                            <ul>
+                                <li class="menu-item-has-children"><a title="Search Restaurants" itemprop="url"><span class="red-clr">REAL REVIEW</span><a>Search</a></li>
+                                <li class="menu-item-has-children"><a title="Result of the Filtering" itemprop="url"><span class="red-clr">REAL REVIEW</span><a href="#result">Results</a></li>
+                            </ul>
+                            <a class="red-bg brd-rd4" title="Share" itemprop="url">Share With Friends</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="block">
+                <div class="fixed-bg" style="background-image: url(/static/images/topbg.jpg);"></div>
+                <div class="page-title-wrapper text-center">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="page-title-inner">
+                            <h1 itemprop="headline">Search Your Target Restaurant</h1>
+                            <form class="restaurant-search-form brd-rd2">
+                                <div class="row mrg10">
+                                    <div class="col-md-10 col-sm-9 col-lg-9 col-xs-20">
+                                        <div class="input-field brd-rd2"><input class="brd-rd2" type="text" value={{ business.url }} placeholder="Restaurant Link"></div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-lg-3 col-xs-12">
+                                        <button class="brd-rd2 red-bg" type="submit">SEARCH</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="bread-crumbs-wrapper">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html" title="" itemprop="url">Home</a></li>
+                    <li class="breadcrumb-item"><a href="list.html" title="" itemprop="url">Search</a></li>
+                    <li class="breadcrumb-item active">Results</li>
+                </ol>
+            </div>
+        </div>
+
+        <section>
+            <div class="block gray-bg bottom-padd210 top-padd30" id="result">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="sec-box">
+                                <div class="sec-wrapper">
+                                    <div class="row">
+                                        <div class="col-md-9 col-sm-12 col-lg-9">
+
+                                            <div class="title2-wrapper">
+                                                <h3 class="marginb-0" itemprop="headline">Recommended Reviews for Your Restaurant</h3>
+                                            </div>
+                                            {% for item in result %}
+                                            <div class="remove-ext" style="float:left; display:inline">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-6 col-lg-6">
+                                                        <div class="featured-restaurant-box with-bg style2 brd-rd12 wow fadeIn" data-wow-delay="0.2s" style="border: 1px solid #e6e6e6; background:#ffffff;">
+                                                            <div class="featured-restaurant-info">
+                                                                <div class="title2-wrapper" style="margin-bottom:10px">
+                                                                    <div class="right">
+                                                                        <h4 style="color:#DC143C;">Time: {{ item.review_date }}</h4>
+                                                                        <h5 style="color:#000000;">Location: {{ item.location }}</h5>
+                                                                    </div>
+                                                                </div>
+                                                                <ul class="post-meta" style="border-top: 1px solid #e6e6e6;">
+                                                                    <div class="content_nr" style="width:110%; height:200px; overflow:auto; margin-top:0px; border-bottom: 1px solid #e6e6e6;">
+                                                                        {% if item.text == '' %}<h5 itemprop="headline"><a title="" itemprop="url" style="font-family: TimesNewRoman; color:#8B4513;">Empty Content</a></h5>
+                                                                        {% else %}<h5 itemprop="headline" style="font-family: TimesNewRoman; line-height:25px; color:#8B4513;><a title="" itemprop="url">{{ item.text }}</a></h5>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                    <h4></h4>
+                                                                    <div class="xt" style="width:100%; overflow:hidden; margin-bottom: 4px; border-bottom: 1px solid #e6e6e6;">
+                                                                    <span class="bj" title="Useful" style="background:url(../static/images/2.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.useful }}</span>
+                                                                    <span class="bj1" title="Funny" style="background:url(../static/images/3.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.funny }}</span>
+                                                                    <span class="bj2" title="Cool" style="background:url(../static/images/4.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.cool }}</span>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h5 style="color:#DC143C;">Reviewer's Info:</h5>
+                                                                    </div>
+                                                                    <span class="bj" title="Total Useful this reviewer received" style="background:url(../static/images/2.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.u_useful }}</span>
+                                                                    <span class="bj1" title="Total Funny this reviewer received" style="background:url(../static/images/3.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.u_funny }}</span>
+                                                                    <span class="bj2" title="Total Cool this reviewer received" style="background:url(../static/images/4.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.u_cool }}</span>
+                                                                    <br><span class="bj4" title="No. of friends this reviewer has" style="background:url(../static/images/1.png) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.friends }}</span>
+                                                                    <span class="bj3" title="No. of reviews this reviewer has" style="background:url(../static/images/5.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.user_review_num }}</span>
+                                                                    <span class="bj5" title="No. of photos this reviewer has" style="background:url(../static/images/2.png) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.photo_num }}</span></br>
+                                                                </ul>
+                                                                <span class="post-rate yellow-bg brd-rd2"><i class="fa fa-star-o"></i> {{ item.rate }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+
+                                            <div class="title2-wrapper">
+                                                <br><h3></h3></br>
+                                                <br><h3></h3></br>
+                                                <h3 class="marginb-0" itemprop="headline">Not Currently Recommended Reviews</h3>
+                                            </div>
+                                            {% for item in unrecommend %}
+                                            <div class="remove-ext">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-6 col-lg-6">
+                                                        <div class="featured-restaurant-box with-bg style2 brd-rd12 wow fadeIn" data-wow-delay="0.2s" style="border: 1px solid #e6e6e6; background:#ffffff; float:left; display:inline;">
+                                                            <div class="featured-restaurant-info">
+                                                                <div class="title2-wrapper" style="margin-bottom:10px">
+                                                                    <div class="right">
+                                                                        <h4 style="color:#DC143C;">Time: {{ item.review_date }}</h4>
+                                                                        <h5 style="color:#000000;">Location: {{ item.location }}</h5>
+                                                                    </div>
+                                                                </div>
+                                                                <ul class="post-meta" style="border-top: 1px solid #e6e6e6;">
+                                                                    <div class="content_nr" style="width:110%; height:200px; overflow:auto; margin-top:0px; border-bottom: 1px solid #e6e6e6; position: relative;">
+                                                                        {% if item.text == '' %}<h5 itemprop="headline"><a title="" itemprop="url" style="font-family: TimesNewRoman; color:#000000;">Empty Content</a></h5>
+                                                                        {% else %}<h5 itemprop="headline" style="font-family: TimesNewRoman; line-height:25px; color:#000000;><a title="" itemprop="url">{{ item.text }}</a></h5>
+                                                                        {% endif %}
+                                                                        {% if item.reason == 'Reviewer is not active' %}
+                                                                        <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);"><img src="{% static 'images/32.png' %}" itemprop="image" style="transform:scaleX(1.8); transform:scaleY(1.3)"></div>
+                                                                        {% elif item.reason == 'Low quality' %}
+                                                                        <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);"><img src="{% static 'images/31.png' %}" itemprop="image" style="transform:scaleX(1.8); transform:scaleY(1.3)"></div>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                    <h4></h4>
+                                                                    <div class="xt" style="width:100%; overflow:hidden; margin-bottom: 4px; border-bottom: 1px solid #e6e6e6;">
+                                                                    <span class="bj" title="Useful" style="background:url(../static/images/2.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.useful }}</span>
+                                                                    <span class="bj1" title="Funny" style="background:url(../static/images/3.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.funny }}</span>
+                                                                    <span class="bj2" title="Cool" style="background:url(../static/images/4.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.cool }}</span>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h5 style="color:#DC143C;">Reviewer's Info:</h5>
+                                                                    </div>
+                                                                    <span class="bj" title="Total Useful this reviewer received" style="background:url(../static/images/2.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.u_useful }}</span>
+                                                                    <span class="bj1" title="Total Funny this reviewer received" style="background:url(../static/images/3.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.u_funny }}</span>
+                                                                    <span class="bj2" title="Total Cool this reviewer received" style="background:url(../static/images/4.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.u_cool }}</span>
+                                                                    <br><span class="bj4" title="No. of friends this reviewer has" style="background:url(../static/images/1.png) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.friends }}</span>
+                                                                    <span class="bj3" title="No. of reviews this reviewer has" style="background:url(../static/images/5.JPG) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.user_review_num }}</span>
+                                                                    <span class="bj5" title="No. of photos this reviewer has" style="background:url(../static/images/2.png) left no-repeat; display:block; color:#999; line-height:28px; width: 80px; margin:0 4px; float:left; padding-left:28px;">{{ item.photo_num }}</span></br>
+                                                                    <div class="right">
+                                                                        <h5 style="color:#DC143C;">Reason for not recommended:</h5>
+                                                                        {% if item.reason == 'Reviewer is not active' %}
+                                                                        <h5 style="color:#000000;">Reviewer is not active</h5>
+                                                                        {% elif item.reason == 'Low quality' %}
+                                                                        <h5 style="color:#000000;">Review's quality is low</h5>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </ul>
+                                                                <span class="post-rate yellow-bg brd-rd2"><i class="fa fa-star-o"></i> {{ item.rate }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="bottom-bar dark-bg text-center">
+            <div class="container">
+                <p itemprop="description">MSc(CS) Project form the University of Hong Kong. <a target="_blank" href="https://i.cs.hku.hk/~msp18019/">Details of the project</a></p>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/plugins.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/filter.js"></script>
+</body>
+</html>
